@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="description" content="Question and Answer App">
+        <title>Question and Answer App - View your Post</title>
+        <!-- styles -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    	<link rel="stylesheet" href="/static/css/styles.css">
+
+    </head>
+    <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ url_for('index') }}">Project 29</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Home</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('get_posts') }}">My Posts</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('new_post') }}">Create Post</a>
+        </li>
+          <li class="nav-item">
+           {% if user %}
+          <a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+          <a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+          <a class="nav-link" href="{{ url_for('register') }}">Register</a></li>
+          {% endif %}
+      </ul>
+      <form class="d-flex" method="POST">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchbar">
+        <button class="btn btn-outline-success" type="submit" formaction="/search">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+
+
+        <h1 id="PostDetails">Post details</h1>
+
+        <table>
+            <tr>
+                <th id="postTitleLabel">Title</th>
+                <th id="postTextLabel">Text</th>
+                <th id="postDateLabel">Date</th>
+
+
+            </tr>
+            <tr id="postTableData">
+                <td>{{ post.title }}</td>
+                <td>{{ post.text }}</td>
+                <td>{{ post.date }}</td>
+
+            </tr>
+        </table>
+    <br>
+                {% if post.image %}
+                <img src="data:image/*;base64, {{ image }}" alt="uploaded image">
+                {% endif %}
+    <br>
+
+
+    <a href="{{ url_for('like_action', post_id=post.id, action='unlike') }}">Unlike</a>
+
+    <a href="{{ url_for('like_action', post_id=post.id, action='like') }}">Like</a>
+
+  {{ post.likes.count() }} likes
+
+
+
+{% if post.comments %}
+  {% if post.comments|length > 0 %}
+    <h2 id="CommentLabel">Comments</h2>
+    <ul>
+    {% for comment in post.comments %}
+      <li id="Comment">{{ comment.content }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endif %}
+<form action="{{ url_for('new_comment', post_id=post.id) }}" method="post">
+  <div class="formwrapper">
+    <h2 class="title" id="AnswerLabel">Answer with a comment</h2>
+    <div class="form-field-post" id="CommentLabel2">
+      <div id="postTBoxLabel">{{ form.comment.label }} </div> <br/> <div id="postTBox">{{ form.comment }}</div>
+    </div>
+    {{ form.submit }}
+  </div>
+</form>
+    </body>
+</html>

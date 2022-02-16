@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Question and Answer App">
+        <title>Question and Answer App - New Post</title>
+        <!-- styles -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    	<link rel="stylesheet" href="/static/css/styles.css">
+
+    </head>
+
+    <body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ url_for('index') }}">Project 29</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Home</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('get_posts') }}">My Posts</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('new_post') }}">Create Post</a>
+        </li>
+          <li class="nav-item">
+           {% if user %}
+          <a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+          <a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+          <a class="nav-link" href="{{ url_for('register') }}">Register</a></li>
+          {% endif %}
+      </ul>
+      <form class="d-flex" method="POST">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchbar">
+        <button class="btn btn-outline-success" type="submit" formaction="/search">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+	{% if post %}
+		<form action="{{ url_for('update_post', post_id=post.id) }}" method="post" >
+	{% else %}
+        <form action="new" method="post" enctype="multipart/form-data">
+	{% endif %}
+
+            <div class="card col-sm-3 mt-4">
+                <div class="card-header">
+                    <div class="dateLabel">{{ today }}</div>
+                </div>
+
+            <div class="card-body">
+
+                <h5 id="titleLabel"><label>Title </label></h5>
+                <p id="titleBox"><input type="text" name="title" value=""/></p>
+                <h5 id="postLabel"><label>Post </label></h5></div>
+                <p id="postBox">
+		        <textarea name="postText"  rows="6" cols="0" >Type your question here ...
+		        </textarea>
+	            </p>
+
+            <h5 class="card-title"></h5>
+            <p class="card-text"></p>
+
+                    <div class="image">
+                         
+                         <input type="file" name="image" id="image" accept="image/*">
+                    </div>
+
+
+
+
+			<input type="submit" value="Add Post">
+
+
+            </div>
+            </div>
+
+
+
+
+
+
+        </form>
+    </body>
+</html>

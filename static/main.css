@@ -1,0 +1,173 @@
+body{
+  background-color: black !important;
+
+}
+
+h1, h2{
+color: black;
+text-align:center;
+
+}
+
+#IndexLabel {
+  color: white;
+}
+
+#IndexLabel2 {
+    color: white;
+
+}
+
+#titleLabel {
+    color: black;
+    text-align: center;
+}
+
+#titleBox {
+    color: black;
+    text-align: center;
+}
+
+#postLabel {
+    color: black;
+    text-align: center;
+}
+
+#postBox {
+    color: black;
+    text-align: center;
+}
+
+#postButton {
+    color: black;
+    text-align: center;
+}
+
+.center-blockA {
+  margin: auto;
+  display: block;
+}
+
+.center-blockB {
+  margin: auto;
+  display: block;
+}
+
+.dateLabel {
+    color: black
+    text-align: center;
+}
+
+.card {
+    margin: auto;
+    display: block;
+}
+
+table{
+background-color: black;
+border-radius: 12px 12px 0 0;
+text-align: center;
+
+}
+
+label{
+color: black;
+margin-left: auto;
+  margin-right: auto;
+}
+
+li{
+color: black;
+list-style-type: none;
+text-align: center;
+}
+
+th,td{
+padding: 20px;
+}
+
+table{
+    color: black;
+    margin: auto;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#submit{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#loginCard {
+  margin: auto;
+  display: block;
+
+}
+
+#registerCard {
+  margin: auto;
+  display: block;
+}
+
+#CommentLabel {
+    color: white;
+}
+
+#Comment {
+    color: white;
+}
+
+#AnswerLabel{
+    color: white;
+}
+
+#CommentLabel2{
+    color: white;
+}
+
+#PostDetails{
+    color: white;
+}
+
+#postTitleLabel {
+    color: white;
+}
+
+#postTextLabel {
+    color: white;
+}
+
+#postDateLabel {
+    color: white;
+}
+
+#postTableData {
+    color: white;
+}
+
+#postTBox {
+    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+}
+
+#postTBoxLabel {
+    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+    color: white;
+
+}
+
+
+
+
+
+

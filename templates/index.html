@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+    <head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    	<link rel="stylesheet" href="/static/css/styles.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    </head>
+    <body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ url_for('index') }}">Project 29</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Home</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('get_posts') }}">My Posts</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('new_post') }}">Create Post</a>
+        </li>
+          <li class="nav-item">
+           {% if user %}
+          <a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+          <a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+          <a class="nav-link" href="{{ url_for('register') }}">Register</a></li>
+          {% endif %}
+      </ul>
+      <form class="d-flex" method="POST">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchbar">
+        <button class="btn btn-outline-success" type="submit" formaction="/search">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<h1 id="IndexLabel">Welcome {{user}} to the Question and Answer App!</h1>
+
+        <h2 id="IndexLabel2">Use this site to ask questions.</h2>
+<form>
+    <button type="submit" formaction="/latest" id="submit">Show latest</button>
+</form>
+
+
+{% for post in posts %}
+            <div class="card col-sm-3 mt-4">
+                <div class="card-header">
+                {{ post.date }}
+                </div>
+            <div class="card-body">
+            <a href="{{url_for('get_post',post_id=post.id)}}">{{ post.title }}</a>
+            <p class="card-text">{{ post.text }}</p>
+
+
+            <a href="{{ url_for('update_post', post_id=post.id) }}" class="btn btn-primary">Edit</a>
+                <form action="{{ url_for('delete_post', post_id=post.id) }}" method="post">
+			<input type="submit" value="Delete">
+		    </form>
+            </div>
+            </div>
+
+            {% endfor %}
+
+
+
+    </body>
+
+</html>
